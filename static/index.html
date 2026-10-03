@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EmotionAI — Emotion Detection</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <!-- Ambient background -->
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="brand">
+            <div class="brand-mark">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div>
+                <div class="brand-name">Emotion<span>AI</span></div>
+                <div class="brand-subtitle">Neural emotion intelligence</div>
+            </div>
+        </div>
+
+        <div class="system-status">
+            <span class="status-dot"></span>
+            <span>System online</span>
+        </div>
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="container">
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="eyebrow">
+                <span class="eyebrow-line"></span>
+                BI-GRU · NLP MODEL
+            </div>
+
+            <h1>
+                Understand the
+                <span>emotion</span>
+                behind words.
+            </h1>
+
+            <p class="hero-description">
+                Enter a sentence and let our neural model identify the
+                emotional signal hidden inside it.
+            </p>
+        </section>
+
+
+        <!-- WORKSPACE -->
+        <section class="workspace">
+
+            <!-- INPUT CARD -->
+            <div class="input-card card">
+
+                <div class="card-header">
+                    <div>
+                        <div class="section-label">INPUT</div>
+                        <h2>What are you feeling?</h2>
+                    </div>
+
+                    <div class="model-pill">
+                        <span class="pulse-dot"></span>
+                        BiGRU
+                    </div>
+                </div>
+
+
+                <div class="textarea-wrapper">
+
+                    <textarea
+                        id="textInput"
+                        maxlength="2000"
+                        placeholder="Type something like: I finally achieved my dream..."
+                        spellcheck="true"
+                    ></textarea>
+
+                    <div class="textarea-bottom">
+                        <span id="charCount">0 / 2000</span>
+                        <span class="shortcut">
+                            <kbd>Ctrl</kbd>
+                            <span>+</span>
+                            <kbd>Enter</kbd>
+                            Analyze
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <!-- EXAMPLES -->
+                <div class="examples">
+
+                    <span class="examples-label">Try an example</span>
+
+                    <button
+                        class="example-chip"
+                        data-text="I am so happy that everything finally worked out."
+                    >
+                        Happy moment
+                    </button>
+
+                    <button
+                        class="example-chip"
+                        data-text="I can't believe they betrayed me after everything I did for them."
+                    >
+                        Betrayal
+                    </button>
+
+                    <button
+                        class="example-chip"
+                        data-text="I am really scared about what is going to happen tomorrow."
+                    >
+                        Anxiety
+                    </button>
+
+                    <button
+                        class="example-chip"
+                        data-text="I love spending time with the people who matter most to me."
+                    >
+                        Love
+                    </button>
+
+                </div>
+
+
+                <!-- ACTION -->
+                <button id="analyzeBtn" class="analyze-btn">
+
+                    <span class="btn-content">
+                        <span>Analyze emotion</span>
+                        <span class="arrow">→</span>
+                    </span>
+
+                    <span class="loader"></span>
+
+                </button>
+
+            </div>
+
+
+            <!-- RESULT CARD -->
+            <div class="result-card card" id="resultCard">
+
+                <div class="result-placeholder" id="placeholder">
+
+                    <div class="placeholder-orbit">
+                        <div class="orbit-ring"></div>
+                        <div class="orbit-core">
+                            <span>✦</span>
+                        </div>
+                    </div>
+
+                    <h3>Your emotional signal</h3>
+
+                    <p>
+                        Your prediction will appear here after
+                        analyzing the text.
+                    </p>
+
+                </div>
+
+
+                <!-- ACTUAL RESULT -->
+                <div class="result-content" id="resultContent">
+
+                    <div class="result-top">
+
+                        <div>
+                            <div class="section-label">DETECTED EMOTION</div>
+
+                            <div class="emotion-name" id="emotionName">
+                                Joy
+                            </div>
+                        </div>
+
+                        <div class="emotion-emoji" id="emotionEmoji">
+                            😄
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONFIDENCE -->
+                    <div class="confidence-section">
+
+                        <div class="confidence-ring">
+
+                            <svg viewBox="0 0 120 120">
+
+                                <circle
+                                    class="ring-bg"
+                                    cx="60"
+                                    cy="60"
+                                    r="50"
+                                ></circle>
+
+                                <circle
+                                    class="ring-progress"
+                                    id="confidenceRing"
+                                    cx="60"
+                                    cy="60"
+                                    r="50"
+                                ></circle>
+
+                            </svg>
+
+                            <div class="confidence-value">
+                                <strong id="confidenceValue">0%</strong>
+                                <span>confidence</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="confidence-copy">
+
+                            <span class="mini-label">MODEL SIGNAL</span>
+
+                            <h3 id="confidenceTitle">
+                                Processing...
+                            </h3>
+
+                            <p id="confidenceText">
+                                The model's confidence will be shown here.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PROBABILITIES -->
+                    <div class="probability-section">
+
+                        <div class="probability-header">
+                            <span>Emotion distribution</span>
+                            <span>Probability</span>
+                        </div>
+
+                        <div id="probabilityBars"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER INFO -->
+        <section class="info-strip">
+
+            <div class="info-item">
+                <span class="info-icon">◎</span>
+                <div>
+                    <strong>6 emotions</strong>
+                    <small>Classification categories</small>
+                </div>
+            </div>
+
+            <div class="info-divider"></div>
+
+            <div class="info-item">
+                <span class="info-icon">⌁</span>
+                <div>
+                    <strong>Bi-directional GRU</strong>
+                    <small>Sequence understanding</small>
+                </div>
+            </div>
+
+            <div class="info-divider"></div>
+
+            <div class="info-item">
+                <span class="info-icon">↯</span>
+                <div>
+                    <strong>Real-time</strong>
+                    <small>Instant prediction</small>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <span>EmotionAI</span>
+        <span>·</span>
+        <span>Built with FastAPI + TensorFlow</span>
+    </footer>
+
+
+    <script src="/static/script.js"></script>
+
+</body>
+
+</html>
